@@ -1,4 +1,4 @@
-import json
+import storage
 import tkinter as tk
 from tkinter import ttk, messagebox
 from datetime import datetime
@@ -146,28 +146,6 @@ class WeatherDiary:
         self.filter_date_entry.delete(0, tk.END)
         self.filter_temp_entry.delete(0, tk.END)
         self.display_records()
-
-    # ---------- JSON Save/Load ----------
-    def save_to_json(self):
-        filename = "weather_data.json"
-        try:
-            with open(filename, "w", encoding="utf-8") as f:
-                json.dump(self.records, f, indent=4, ensure_ascii=False)
-            messagebox.showinfo("Success", f"Saved to {filename}")
-        except Exception as e:
-            messagebox.showerror("Error", f"Could not save: {e}")
-
-    def load_from_json(self):
-        filename = "weather_data.json"
-        try:
-            with open(filename, "r", encoding="utf-8") as f:
-                self.records = json.load(f)
-            self.display_records()
-            messagebox.showinfo("Success", f"Loaded from {filename}")
-        except FileNotFoundError:
-            messagebox.showerror("Error", "File not found. Save some data first.")
-        except Exception as e:
-            messagebox.showerror("Error", f"Error loading: {e}")
 
 if __name__ == "__main__":
     root = tk.Tk()
